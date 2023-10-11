@@ -1,3 +1,14 @@
+terraform {
+  backend "s3" {
+    bucket = "mjsydney23-terraform-state"
+    key    = "global/s3/terraform.tfstate"
+    region = "ap-southeast-2"
+
+    dynamodb_table = "mjsydney23-terraform-locks"
+    encrypt        = true
+  }
+}
+
 provider "aws" {
   region = "ap-southeast-2"
 }
