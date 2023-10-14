@@ -34,9 +34,10 @@ resource "aws_launch_configuration" "example" {
   #   nohup busybox httpd -f -p ${var.server_port} &
   #   EOF
 
-  user_data = templatefile("userdata.sh",
-    {
-      server_port = var.server_port
+  user_data = templatefile("userdata.sh", {
+    server_port = var.server_port
+    db_endpoint = data.terraform_remote_state.db.outputs.address
+    db_port     = data.terraform_remote_state.db.outputs.port
     }
   )
 
@@ -71,6 +72,16 @@ data "aws_subnets" "default" {
   filter {
     name   = "vpc-id"
     values = [data.aws_vpc.default.id]
+  }
+}
+
+data "terraform_remote_state" "db" {
+  backend = "s3"
+
+  config = {
+    bucket = var.db_remote_state_bucket
+    key    = "stage/data-store/postgresql/terraform.tfstate"
+    region = var.region
   }
 }
 
