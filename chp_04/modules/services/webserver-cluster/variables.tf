@@ -1,3 +1,9 @@
+variable "region" {
+  description = "The name of the security group for the ALB"
+  type        = string
+  default     = "ap-southeast-2"
+}
+
 variable "cluster_name" {
   description = "The name to use for all the cluster resources"
   type        = string
