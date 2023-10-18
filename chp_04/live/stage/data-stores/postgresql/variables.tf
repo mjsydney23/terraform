@@ -4,10 +4,6 @@ variable "region" {
   default     = "ap-southeast-2"
 }
 
-# Pass sensitive value via environment variables
-# export TF_VAR_db_username="(database user name)"
-# export TF_VAR_db_password="(database password)"
-
 variable "db_username" {
   description = "The username for the database"
   type        = string

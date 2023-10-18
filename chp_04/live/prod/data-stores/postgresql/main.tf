@@ -11,7 +11,7 @@ terraform {
 
   backend "s3" {
     bucket = "mjsydney23-terraform-state"
-    key    = "stage/data-store/postgresql/terraform.tfstate"
+    key    = "prod/data-store/postgresql/terraform.tfstate"
     region = "ap-southeast-2"
 
     dynamodb_table = "mjsydney23-terraform-locks"
@@ -28,7 +28,7 @@ resource "aws_db_instance" "example" {
   engine              = "postgres"
   instance_class      = "db.t4g.micro"
   allocated_storage   = 5
-  engine_version      = "12.11"
+  engine_version      = "14"
   skip_final_snapshot = true
   publicly_accessible = false # this is the default value
 
